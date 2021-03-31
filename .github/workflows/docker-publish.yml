@@ -18,6 +18,8 @@ jobs:
     if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: true
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
@@ -25,51 +27,51 @@ jobs:
       - name: Build image
         run: docker build . -t lsm-test -f .\build\Dockerfiles\Ubuntu\Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/arm/v5
 
-  build_debian_oldstable_arm_v7:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    steps:
-      - uses: actions/checkout@v2
+  # build_debian_oldstable_arm_v7:
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push'
+  #   steps:
+  #     - uses: actions/checkout@v2
 
-      - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+  #     - name: Log into registry
+  #       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
-      - name: Build image
-        run: docker build . -t lsm-test -f .\build\Dockerfiles\Ubuntu\Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/arm/v7
+  #     - name: Build image
+  #       run: docker build . -t lsm-test -f .\build\Dockerfiles\Ubuntu\Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/arm/v7
 
-  build_debian_oldstable_arm64_v8:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    steps:
-      - uses: actions/checkout@v2
+  # build_debian_oldstable_arm64_v8:
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push'
+  #   steps:
+  #     - uses: actions/checkout@v2
 
-      - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+  #     - name: Log into registry
+  #       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
-      - name: Build image
-        run: docker build . -t lsm-test -f .\build\Dockerfiles\Ubuntu\Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/arm64/v8
+  #     - name: Build image
+  #       run: docker build . -t lsm-test -f .\build\Dockerfiles\Ubuntu\Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/arm64/v8
 
-  build_debian_oldstable_amd64:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    steps:
-      - uses: actions/checkout@v2
+  # build_debian_oldstable_amd64:
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push'
+  #   steps:
+  #     - uses: actions/checkout@v2
 
-      - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+  #     - name: Log into registry
+  #       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
-      - name: Build image
-        run: docker build . -t lsm-test -f .\build\Dockerfiles\Ubuntu\Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/amd64
+  #     - name: Build image
+  #       run: docker build . -t lsm-test -f .\build\Dockerfiles\Ubuntu\Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/amd64
 
-  build_debian_oldstable_386:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    steps:
-      - uses: actions/checkout@v2
+  # build_debian_oldstable_386:
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push'
+  #   steps:
+  #     - uses: actions/checkout@v2
 
-      - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+  #     - name: Log into registry
+  #       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
-      - name: Build image
-        run: docker build . -t lsm-test -f .\build\Dockerfiles\Ubuntu\Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/386
+  #     - name: Build image
+  #       run: docker build . -t lsm-test -f .\build\Dockerfiles\Ubuntu\Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/386
 
