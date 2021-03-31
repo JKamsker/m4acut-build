@@ -13,9 +13,47 @@ env:
   IMAGE_NAME: m4acut
 
 jobs:
+  if: github.event_name == 'push'
   build_debian_oldstable_arm_v5:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Build image
+        run: docker build . -t lsm-test -f ./build/Dockerfiles/Ubuntu/Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/arm/v5
+
+  build_debian_oldstable_arm_v7:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Build image
+        run: docker build . -t lsm-test -f ./build/Dockerfiles/Ubuntu/Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/arm/v7
+
+  build_debian_oldstable_arm64_v8:
+    runs-on: ubuntu-latest
     steps:
       -
         name: Checkout
@@ -33,6 +71,8 @@ jobs:
         name: Build image
         run: docker build . -t lsm-test -f ./build/Dockerfiles/Ubuntu/Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/arm64/v8
 
+  # build_debian_oldstable_amd64:
+  # build_debian_oldstable_386:
 
       # - uses: actions/checkout@v2
       #   with:
