@@ -1,0 +1,7 @@
+[submodule "l-smash"]
+	path = src/l-smash
+	url = https://github.com/JKamsker/l-smash.git
+
+[submodule "m4acut"]
+	path = src/m4acut
+	url = https://github.com/JKamsker/m4acut.git
