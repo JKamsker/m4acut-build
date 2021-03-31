@@ -21,11 +21,18 @@ jobs:
         with:
           submodules: true
 
-      - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+      - name: Listing Contents
+        run: |
+          ls src/
+          ls src/l-smash/
+          ls src/m4acut/
 
-      - name: Build image
-        run: docker build . -t lsm-test -f .\build\Dockerfiles\Ubuntu\Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/arm/v5
+
+      # - name: Log into registry
+      #   run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      # - name: Build image
+      #   run: docker build . -t lsm-test -f .\build\Dockerfiles\Ubuntu\Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/arm/v5
 
   # build_debian_oldstable_arm_v7:
   #   runs-on: ubuntu-latest
