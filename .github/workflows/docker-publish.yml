@@ -23,10 +23,13 @@ jobs:
 
       - name: Listing Contents
         run: |
+          echo 1
           ls src/
+          echo 2
           ls src/l-smash/
+          echo 3
           ls src/m4acut/
-
+          echo 4
 
       # - name: Log into registry
       #   run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
