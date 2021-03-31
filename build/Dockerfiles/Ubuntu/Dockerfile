@@ -12,7 +12,7 @@ WORKDIR /app
 COPY src/l-smash ./
 
 RUN dos2unix configure && chmod +x configure
-
+RUN ./configure --prefix='/usr' --enable-shared --disable-static 
 RUN ./configure --prefix='/usr' --enable-shared --disable-static  \
     && make \
     && make install \
@@ -63,3 +63,21 @@ RUN rm -rf /build \
 
 
 # Start-Process powershell ""
+
+
+# ./configure --prefix='$pwd/tmp' --enable-shared --disable-static 
+
+
+#  export LIBARCH=arm64 && ./configure --prefix="$PWD/tmp" --enable-shared --disable-static && make && make install
+
+#  export LIBARCH=i386 && ./configure --prefix="$PWD/tmp" --enable-shared --disable-static && make && make install
+#  readelf -h tmp/lib/liblsmash.so | grep 'Class\|File\|Machine'
+
+# this on armv5:
+#  results in
+#   Class:                             ELF32
+#   Machine:                           ARM
+
+# on x64
+#   Class:                             ELF64
+#   Machine:                           Advanced Micro Devices X86-64
