@@ -12,8 +12,9 @@ on:
 env:
   IMAGE_NAME: m4acut
 
+#  if: github.event_name == 'push'
+
 jobs:
-  if: github.event_name == 'push'
   build_debian_oldstable_arm_v5:
     runs-on: ubuntu-latest
     steps:
