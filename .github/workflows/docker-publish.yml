@@ -35,7 +35,7 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Build image
-        run: docker build . -t lsm-test -f ./build/Dockerfiles/Ubuntu/Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/arm/v5
+        run: docker build . -t lsm-test -f ./build/Dockerfiles/Ubuntu/Dockerfile --build-arg baseImage=debian:oldstable-slim --platform linux/arm64/v8
 
   # build_debian_oldstable_arm_v7:
   #   runs-on: ubuntu-latest
