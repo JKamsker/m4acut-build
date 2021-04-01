@@ -6,13 +6,16 @@ FROM $baseImage
 # RUN echo yolo $baseImage
 
 # FROM ubuntu:20.04
-RUN apt update && apt install -y git build-essential autoconf automake dos2unix
+RUN apt update && apt install -y build-essential autoconf automake dos2unix
 
 WORKDIR /app
 COPY src/l-smash ./
 
 RUN dos2unix configure && chmod +x configure
-RUN ./configure --prefix='/usr' --enable-shared --disable-static 
+
+# RUN ./configure --prefix='/usr' --enable-shared --disable-static 
+
+
 RUN ./configure --prefix='/usr' --enable-shared --disable-static  \
     && make \
     && make install \
@@ -22,20 +25,28 @@ RUN ./configure --prefix='/usr' --enable-shared --disable-static  \
     &&  ./configure --prefix='/build' --enable-shared --disable-static \
     && make install
 
-RUN rm -rf /app/*
+RUN readelf -h /build/lib/liblsmash.so
 
-# Running m4acut build
+# RUN rm -rf /app/*
 
-COPY src/m4acut ./
 
-RUN rm -rf /build \
-    && (automake || true) \
-    && autoreconf -i \
-    && ./configure \
-    && make \
-    && make install \
-    && mkdir -p /build \
-    && cp ./m4acut /build
+
+# # Running m4acut build
+
+# RUN command
+
+# COPY src/m4acut ./
+
+# RUN rm -rf /build \
+#     && (automake || true) \
+#     && autoreconf -i \
+#     && ./configure \
+#     && make \
+#     && make install \
+#     && mkdir -p /build \
+#     && cp ./m4acut /build
+
+
 
 
 
@@ -71,7 +82,7 @@ RUN rm -rf /build \
 #  export LIBARCH=arm64 && ./configure --prefix="$PWD/tmp" --enable-shared --disable-static && make && make install
 
 #  export LIBARCH=i386 && ./configure --prefix="$PWD/tmp" --enable-shared --disable-static && make && make install
-#  readelf -h tmp/lib/liblsmash.so | grep 'Class\|File\|Machine'
+#  readelf -h liblsmash.so | grep 'Class\|File\|Machine'
 
 # this on armv5:
 #  results in
@@ -81,3 +92,11 @@ RUN rm -rf /build \
 # on x64
 #   Class:                             ELF64
 #   Machine:                           Advanced Micro Devices X86-64
+
+
+# armv4t
+
+# ./configure --prefix="$PWD/tmp" --enable-shared --disable-static --arch=armv4t && make && make install
+
+# x86-64
+# 
